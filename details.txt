@@ -1,0 +1,62 @@
+372bc744c03c481aceabedaa41d2a98169ba4da5
+sonar token
+version 7.9 sonar
+
+CREATE DATABASE sonarqube_db;
+CREATE USER 'sonarqube'@'localhost' IDENTIFIED BY 'sonarqube';
+GRANT ALL PRIVILEGES ON sonarqube_db.* TO 'sonarqube'@'localhost' IDENTIFIED BY 'sonarqube';
+FLUSH PRIVILEGES;
+
+Created symlink from /etc/systemd/system/multi-user.target.wants/sonar.service to /etc/systemd/system/sonar.service.
+
+https://stackoverflow.com/questions/46771233/max-file-descriptors-for-elasticsearch-process-is-too-low/53809888
+
+
+
+pEyjO5zPQ9mAlPz3hya_gA  cluster uuid
+
+
+  script:
+  - mvn package sonar:sonar -Dsonar.host.url=https://sonar.yourdomain.tld/ 
+
+  https://notebook.yasithab.com/centos/install-sonarqube-on-centos-7/
+
+
+  sudo -u postgres psql
+
+CREATE DATABASE sonar_db;
+CREATE USER danish WITH ENCRYPTED PASSWORD 'danish';
+GRANT ALL PRIVILEGES ON DATABASE sonar_db TO danish;
+ALTER DATABASE sonar_db OWNER TO danish;
+\q
+
+
+systemctl enable kubelet
+systemctl start kubelet
+systemctl enable docker
+systemctl start docker
+
+mkdir -p $HOME/.kube
+cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+chown $(id -u):$(id -g) $HOME/.kube/config
+
+# hostnamectl set-hostname master-node
+# cat <<EOF>> /etc/hosts
+192.168.2.163 master-node
+EOF
+
+firewall-cmd --permanent --add-port=6443/tcp
+firewall-cmd --permanent --add-port=2379-2380/tcp
+firewall-cmd --permanent --add-port=10250/tcp
+firewall-cmd --permanent --add-port=10251/tcp
+firewall-cmd --permanent --add-port=10252/tcp
+firewall-cmd --permanent --add-port=10255/tcp
+firewall-cmd –reload
+modprobe br_netfilter
+echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
+
+minikube start --driver=none --extra-config=kubeadm.ignore-preflight-errors=NumCPU --force --cpus 1
+minikube update-context
+kubectl config use-context minikube
+
+kubectl delete daemonsets,replicasets,services,deployments,pods,rc --all
