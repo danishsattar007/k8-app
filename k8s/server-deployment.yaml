@@ -36,7 +36,7 @@ spec:
                   valueFrom: 
                     secretKeyRef:
                       name: pgpassword
-                      value: PGPASSWORD
+                      key: PGPASSWORD
             # - PGDATABASE=postgres
             # #- POSTGRES_PASSWORD=password
             # - PGPASSWORD=postgres_password
