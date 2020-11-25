@@ -7,13 +7,23 @@ spec:
   selector:
     matchLabels: 
         componenet: postgres
-  template:
+
+
+  template: 
     metadata:
       labels:
         componenet: postgres
     spec:
-        containers:
-            - name: postgres
-              image: postgres
-              ports:
-                - containerPort: 5432
+      volumes:
+        - name: postgres-storage
+          persistentVolumeClaim:
+            claimName: database-peristent-volume-claim
+      containers:
+        - name: postgres
+          image: postgres
+          ports:
+           - containerPort: 5432
+          volumeMounts:
+           - name: postgres-storage 
+             mountPath: /var/lib/postgresql/data
+             subPath: postgres
